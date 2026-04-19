@@ -1,0 +1,29 @@
+name: Reusable release with Sigstore attestation
+
+on:
+  workflow_call:
+    inputs:
+      subject_path:
+        description: 'Glob of files to attest (relative to repo root)'
+        required: false
+        type: string
+        default: '**/SKILL.md **/SKILL_HE.md **/metadata.json'
+
+permissions:
+  id-token: write
+  contents: write
+  attestations: write
+
+jobs:
+  attest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-path: ${{ inputs.subject_path }}
