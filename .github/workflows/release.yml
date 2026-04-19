@@ -2,12 +2,6 @@ name: Reusable release with Sigstore attestation
 
 on:
   workflow_call:
-    inputs:
-      subject_path:
-        description: 'Glob of files to attest (relative to repo root)'
-        required: false
-        type: string
-        default: '**/SKILL.md **/SKILL_HE.md **/metadata.json'
 
 permissions:
   id-token: write
@@ -26,4 +20,7 @@ jobs:
       - name: Attest build provenance
         uses: actions/attest-build-provenance@v2
         with:
-          subject-path: ${{ inputs.subject_path }}
+          subject-path: |
+            **/SKILL.md
+            **/SKILL_HE.md
+            **/metadata.json

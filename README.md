@@ -1,6 +1,6 @@
 # release-workflow
 
-Reusable GitHub Actions release workflow used by every [skills-il](https://github.com/skills-il) category repo and the [mcps](https://github.com/skills-il/mcps) monorepo.
+Reusable GitHub Actions release workflow used by every [skills-il](https://github.com/skills-il) category repo .
 
 Single source of truth for:
 - Creating a GitHub Release with auto-generated notes when a `v*` tag is pushed
