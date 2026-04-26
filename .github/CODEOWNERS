@@ -1,0 +1,4 @@
+# All changes to this reusable workflow require review from the listed owners.
+# This is a security-critical repo (id-token: write, contents: write,
+# attestations: write) consumed by every skills-il category repo.
+*       @choroshin

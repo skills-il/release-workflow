@@ -1,0 +1,14 @@
+version: 2
+updates:
+  # Keep the SHA pins in .github/workflows/release.yml current.
+  # Dependabot opens PRs that bump the SHA and update the version comment,
+  # so we get supply-chain hardening (SHA pinning) without missing security
+  # updates from upstream actions.
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: chore(deps)
