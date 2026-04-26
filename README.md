@@ -1,6 +1,6 @@
 # release-workflow
 
-Reusable GitHub Actions release workflow used by every [skills-il](https://github.com/skills-il) category repo .
+Reusable GitHub Actions release workflow used by every [skills-il](https://github.com/skills-il) category repo.
 
 Single source of truth for:
 - Creating a GitHub Release with auto-generated notes when a `v*` tag is pushed
@@ -19,14 +19,28 @@ jobs:
     uses: skills-il/release-workflow/.github/workflows/release.yml@v1
 ```
 
-Optional: override `subject_path` to target different files:
+### Pinning to an immutable version
+
+`v1` is a moving alias that always points at the latest backward-compatible commit. For supply-chain hardening, pin to the immutable semver tag instead:
+
+```yaml
+jobs:
+  release:
+    uses: skills-il/release-workflow/.github/workflows/release.yml@v1.0.0
+```
+
+### Overriding `subject_path`
+
+The workflow attests `**/SKILL.md`, `**/SKILL_HE.md`, and `**/metadata.json` by default. Override with newline-separated globs (the upstream `actions/attest-build-provenance` action does **not** accept space-separated values):
 
 ```yaml
 jobs:
   release:
     uses: skills-il/release-workflow/.github/workflows/release.yml@v1
     with:
-      subject_path: 'src/**/*.ts package.json'
+      subject_path: |
+        src/**/*.ts
+        package.json
 ```
 
 ## Why
