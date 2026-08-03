@@ -14,6 +14,7 @@ on:
           **/SKILL.md
           **/SKILL_HE.md
           **/metadata.json
+          **/scripts/**
 
 permissions:
   id-token: write

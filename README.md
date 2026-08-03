@@ -31,7 +31,9 @@ jobs:
 
 ### Overriding `subject_path`
 
-The workflow attests `**/SKILL.md`, `**/SKILL_HE.md`, and `**/metadata.json` by default. Override with newline-separated globs (the upstream `actions/attest-build-provenance` action does **not** accept space-separated values):
+The workflow attests `**/SKILL.md`, `**/SKILL_HE.md`, `**/metadata.json` and `**/scripts/**` by default.
+
+`**/scripts/**` covers the helper scripts a skill ships, which are the files a user actually EXECUTES. Leaving them unattested was the bigger gap: a tampered `comparables.py` would have passed every provenance check while the markdown around it verified cleanly. Directories matched by the glob are skipped automatically (the upstream action stats each match and keeps only regular files), and the subject count stays far below the action's 1024 limit (the largest category repo produces ~144). Override with newline-separated globs (the upstream `actions/attest-build-provenance` action does **not** accept space-separated values):
 
 ```yaml
 jobs:
